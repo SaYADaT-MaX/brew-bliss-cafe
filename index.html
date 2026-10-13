@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta name="description" content="Brew Bliss Cafe - Fresh coffee, delicious food and cozy moments.">
+  <title>Brew Bliss Café | Good Coffee, Great Mood</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@400;500;600;700&family=Playfair+Display:wght@500;600;700&display=swap" rel="stylesheet">
+  <style>
+    :root {
+      --brown: #2b180f;
+      --coffee: #59351f;
+      --gold: #e8bd77;
+      --cream: #fff8ee;
+      --muted: #75675d;
+    }
+
+    * { box-sizing: border-box; margin: 0; padding: 0; }
+    html { scroll-behavior: smooth; }
+    body {
+      font-family: 'DM Sans', sans-serif;
+      background: var(--cream);
+      color: var(--brown);
+      line-height: 1.6;
+    }
+    a { color: inherit; text-decoration: none; }
+    .container { width: min(1120px, 90%); margin: auto; }
+
+    header {
+      background: var(--brown);
+      color: white;
+      position: sticky;
+      top: 0;
+      z-index: 10;
+      border-bottom: 1px solid #ffffff20;
+    }
+    nav {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+    .logo {
+      color: var(--gold);
+      font-family: 'Playfair Display', serif;
+      font-size: 24px;
+      font-weight: 700;
+      white-space: nowrap;
+    }
+    .logo span {
+      display: block;
+      color: white;
+      font: 10px 'DM Sans', sans-serif;
+      letter-spacing: 5px;
+      text-align: center;
+    }
+    .nav-links { display: flex; gap: 25px; align-items: center; }
+    .nav-links a { font-size: 14px; color: #f5e8da; }
+    .nav-links a:hover { color: var(--gold); }
+    .menu-toggle {
+      display: none;
+      background: none;
+      border: 1px solid #ffffff50;
+      color: white;
+      border-radius: 8px;
+      padding: 7px 11px;
+      font-size: 20px;
+    }
+
+    .btn {
+      display: inline-block;
+      padding: 12px 21px;
+      background: var(--gold);
+      color: var(--brown);
+      font-weight: 700;
+      border-radius: 30px;
+      border: 1px solid var(--gold);
+      transition: .2s;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    .btn:hover { transform: translateY(-2px); filter: brightness(1.05); }
+    .btn-outline { background: transparent; color: white; border-color: #e8bd7780; }
+
+    .hero {
+      color: white;
+      min-height: 520px;
+      display: flex;
+      align-items: center;
+      background:
+        linear-gradient(90deg, #1d1008 0%, #1d1008e8 38%, #1d100850 100%),
+        url('https://images.unsplash.com/photo-1442512595331-e89e73853f31?auto=format&fit=crop&w=1800&q=85') center/cover;
+    }
+    .hero-content { max-width: 650px; padding: 85px 0; }
+    .eyebrow {
+      color: #b17b3e;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 3px;
+      text-transform: uppercase;
+    }
+    .hero .eyebrow { color: var(--gold); }
+    h1, h2, h3 { font-family: 'Playfair Display', serif; line-height: 1.2; }
+    h1 { font-size: clamp(40px, 6vw, 68px); margin: 15px 0; }
+    h1 em { color: var(--gold); font-weight: 500; }
+    .hero p { max-width: 480px; color: #f3e7dc; margin-bottom: 27px; }
+    .actions { display: flex; flex-wrap: wrap; gap: 12px; }
+
+    section { padding: 76px 0; }
+    .section-head { text-align: center; margin-bottom: 32px; }
+    .section-head h2 { font-size: clamp(30px, 4vw, 42px); margin: 8px 0; }
+    .section-head p { color: var(--muted); max-width: 540px; margin: auto; }
+
+    .filters { display: flex; justify-content: center; flex-wrap: wrap; gap: 9px; margin: 24px 0; }
+    .filter {
+      border: 1px solid #e6d7c5;
+      background: white;
+      color: var(--coffee);
+      border-radius: 24px;
+      padding: 8px 17px;
+      cursor: pointer;
+    }
+    .filter.active, .filter:hover { background: var(--brown); color: white; border-color: var(--brown); }
+
+    .grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 20px; }
+    .food-card {
+      background: white;
+      border-radius: 15px;
+      overflow: hidden;
+      border: 1px solid #efe5d9;
+      box-shadow: 0 8px 25px #351d0c0a;
+      transition: .25s;
+    }
+    .food-card:hover { transform: translateY(-5px); box-shadow: 0 15px 30px #351d0c14; }
+    .food-card img { width: 100%; height: 175px; object-fit: cover; display: block; }
+    .food-info { padding: 17px; }
+    .food-info h3 { font-size: 19px; }
+    .food-info p { color: var(--muted); font-size: 13px; margin: 7px 0 12px; }
+    .price { font-weight: 700; font-size: 18px; margin-bottom: 13px; }
+    .order-btn {
+      display: block;
+      text-align: center;
+      background: var(--brown);
+      color: white;
+      padding: 10px;
+      border-radius: 25px;
+      font-size: 13px;
+      font-weight: 700;
+    }
+    .order-btn:hover { background: var(--coffee); }
+
+    .offer {
+      background: var(--brown);
+      color: white;
+      padding: 50px 0;
+    }
+    .offer-inner { display: flex; align-items: center; justify-content: space-between; gap: 30px; }
+    .offer h2 { font-size: clamp(30px, 4vw, 45px); margin: 8px 0; }
+    .offer p { color: #e5d4c5; margin-bottom: 20px; }
+    .offer img { width: 40%; max-height: 260px; object-fit: cover; border-radius: 18px; }
+
+    .about-grid { display: grid; grid-template-columns: 1fr 1fr; align-items: center; gap: 45px; }
+    .about-grid img { width: 100%; height: 330px; object-fit: cover; border-radius: 18px; }
+    .about-grid h2 { font-size: 40px; margin: 10px 0 15px; }
+    .about-grid p { color: var(--muted); margin-bottom: 20px; }
+    .stats { display: flex; gap: 25px; flex-wrap: wrap; margin-top: 25px; }
+    .stats strong { display: block; font-size: 22px; color: var(--coffee); }
+
+    .gallery-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 14px; }
+    .gallery-grid img { width: 100%; height: 210px; object-fit: cover; border-radius: 12px; }
+
+    .contact { background: #f4e8d8; }
+    .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 35px; }
+    .contact h2 { font-size: 38px; margin: 10px 0; }
+    .contact p { color: var(--muted); margin: 9px 0; }
+    .contact-form { display: grid; gap: 12px; }
+    .contact-form input, .contact-form textarea {
+      width: 100%; padding: 13px 15px; border: 1px solid #dfcbb4;
+      border-radius: 9px; background: white; font: inherit; outline-color: var(--gold);
+    }
+    .contact-form textarea { min-height: 110px; resize: vertical; }
+    .contact-form button { border: none; font: inherit; }
+
+    footer { background: #1b100a; color: #f8eadb; padding: 28px 0; }
+    .footer-inner { display: flex; align-items: center; justify-content: space-between; gap: 20px; flex-wrap: wrap; }
+    footer p { font-size: 12px; color: #c9b6a4; }
+    .footer-links { display: flex; gap: 17px; font-size: 13px; }
+
+    @media (max-width: 850px) {
+      .grid { grid-template-columns: repeat(2, 1fr); }
+      .about-grid { gap: 25px; }
+      .nav-links { gap: 13px; }
+      .nav-links a { font-size: 12px; }
+    }
+    @media (max-width: 600px) {
+      nav { min-height: 68px; }
+      .menu-toggle { display: block; }
+      .nav-links {
+        display: none;
+        position: absolute;
+        top: 68px; left: 0; right: 0;
+        padding: 20px 5%;
+        background: var(--brown);
+        flex-direction: column;
+        align-items: flex-start;
+      }
+      .nav-links.open { display: flex; }
+      .nav-order { display: none; }
+      .hero { min-height: 490px; background-position: 60% center; }
+      .hero-content { padding: 65px 0; }
+      section { padding: 55px 0; }
+      .grid { grid-template-columns: 1fr 1fr; gap: 11px; }
+      .food-card img { height: 130px; }
+      .food-info { padding: 11px; }
+      .food-info h3 { font-size: 16px; }
+      .food-info p { font-size: 12px; }
+      .price { font-size: 16px; }
+      .order-btn { font-size: 11px; padding: 9px 5px; }
+      .offer-inner, .about-grid, .contact-grid { grid-template-columns: 1fr; display: grid; }
+      .offer img { width: 100%; max-height: 220px; }
+      .about-grid img { height: 250px; }
+      .about-grid h2, .contact h2 { font-size: 32px; }
+      .gallery-grid { grid-template-columns: repeat(2, 1fr); gap: 9px; }
+      .gallery-grid img { height: 140px; }
+      .footer-inner { flex-direction: column; text-align: center; }
+      .footer-links { justify-content: center; flex-wrap: wrap; }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container">
+      <nav>
+        <a class="logo" href="#home">☕ Brew Bliss<span>CAFÉ</span></a>
+        <button class="menu-toggle" id="menuToggle" aria-label="Open navigation">☰</button>
+        <div class="nav-links" id="navLinks">
+          <a href="#home">Home</a>
+          <a href="#menu">Menu</a>
+          <a href="#about">About Us</a>
+          <a href="#gallery">Gallery</a>
+          <a href="#contact">Contact</a>
+        </div>
+        <a class="btn nav-order" href="https://wa.me/8801000000000?text=Hello%20Brew%20Bliss%20Cafe" target="_blank" rel="noopener">Order on WhatsApp</a>
+      </nav>
+    </div>
+  </header>
+
+  <main>
+    <section class="hero" id="home">
+      <div class="container">
+        <div class="hero-content">
+          <div class="eyebrow">Good Food · Great Coffee · Better Mood</div>
+          <h1>Welcome to<br><em>Brew Bliss Café</em></h1>
+          <p>Freshly brewed coffee, delicious food and a cozy place to make your day special.</p>
+          <div class="actions">
+            <a class="btn" href="https://wa.me/8801000000000?text=Hello%20Brew%20Bliss%20Cafe" target="_blank" rel="noopener">☏ Order Now</a>
+            <a class="btn btn-outline" href="#menu">Explore Menu →</a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Our Menu</div>
+          <h2>Fresh & Delicious</h2>
+          <p>From aromatic coffee to mouth-watering snacks, we serve only the best for you.</p>
+        </div>
+        <div class="filters" id="filters">
+          <button class="filter active" data-filter="all">All</button>
+          <button class="filter" data-filter="coffee">Coffee</button>
+          <button class="filter" data-filter="food">Food</button>
+          <button class="filter" data-filter="dessert">Dessert</button>
+        </div>
+        <div class="grid" id="foodGrid">
+          <article class="food-card" data-category="coffee">
+            <img src="https://images.unsplash.com/photo-1509042239860-f550ce710b93?auto=format&fit=crop&w=600&q=80" alt="Hot cappuccino">
+            <div class="food-info">
+              <h3>Cappuccino</h3><p>Rich coffee with creamy milk foam.</p>
+              <div class="price">৳ 120</div>
+              <a class="order-btn" href="https://wa.me/8801000000000?text=I%20want%20to%20order%20Cappuccino" target="_blank" rel="noopener">Order on WhatsApp</a>
+            </div>
+          </article>
+          <article class="food-card" data-category="coffee">
+            <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80" alt="Iced coffee">
+            <div class="food-info">
+              <h3>Iced Coffee</h3><p>Chilled coffee for a refreshing break.</p>
+              <div class="price">৳ 140</div>
+              <a class="order-btn" href="https://wa.me/8801000000000?text=I%20want%20to%20order%20Iced%20Coffee" target="_blank" rel="noopener">Order on WhatsApp</a>
+            </div>
+          </article>
+          <article class="food-card" data-category="food">
+            <img src="https://images.unsplash.com/photo-1568901346375-23c9450c58cd?auto=format&fit=crop&w=600&q=80" alt="Beef burger">
+            <div class="food-info">
+              <h3>Beef Burger</h3><p>Juicy burger with fresh vegetables.</p>
+              <div class="price">৳ 250</div>
+              <a class="order-btn" href="https://wa.me/8801000000000?text=I%20want%20to%20order%20Beef%20Burger" target="_blank" rel="noopener">Order on WhatsApp</a>
+            </div>
+          </article>
+          <article class="food-card" data-category="food">
+            <img src="https://images.unsplash.com/photo-1528735602780-2552fd46c7af?auto=format&fit=crop&w=600&q=80" alt="Club sandwich">
+            <div class="food-info">
+              <h3>Club Sandwich</h3><p>Freshly prepared, tasty and filling.</p>
+              <div class="price">৳ 220</div>
+              <a class="order-btn" href="https://wa.me/8801000000000?text=I%20want%20to%20order%20Club%20Sandwich" target="_blank" rel="noopener">Order on WhatsApp</a>
+            </div>
+          </article>
+          <article class="food-card" data-category="dessert">
+            <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Chocolate cake">
+            <div class="food-info">
+              <h3>Chocolate Cake</h3><p>Rich chocolate flavor in every bite.</p>
+              <div class="price">৳ 180</div>
+              <a class="order-btn" href="https://wa.me/8801000000000?text=I%20want%20to%20order%20Chocolate%20Cake" target="_blank" rel="noopener">Order on WhatsApp</a>
+            </div>
+          </article>
+          <article class="food-card" data-category="dessert">
+            <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?auto=format&fit=crop&w=600&q=80" alt="Sweet dessert bowl">
+            <div class="food-info">
+              <h3>Sweet Dessert</h3><p>A little treat to brighten your day.</p>
+              <div class="price">৳ 160</div>
+              <a class="order-btn" href="https://wa.me/8801000000000?text=I%20want%20to%20order%20Sweet%20Dessert" target="_blank" rel="noopener">Order on WhatsApp</a>
+            </div>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section class="offer">
+      <div class="container offer-inner">
+        <div>
+          <div class="eyebrow">Special Offer</div>
+          <h2>Make Today<br>Extra Special</h2>
+          <p>Enjoy 20% off on selected coffee items.</p>
+          <a class="btn" href="https://wa.me/8801000000000?text=Hello%2C%20I%20want%20to%20know%20about%20the%20coffee%20offer" target="_blank" rel="noopener">Claim Offer →</a>
+        </div>
+        <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=900&q=80" alt="Coffee shop special">
+      </div>
+    </section>
+
+    <section id="about">
+      <div class="container about-grid">
+        <img src="https://images.unsplash.com/photo-1554118811-1e0d58224f24?auto=format&fit=crop&w=1000&q=80" alt="Cozy cafe interior">
+        <div>
+          <div class="eyebrow">About Us</div>
+          <h2>A Cozy Corner for Coffee Lovers</h2>
+          <p>Brew Bliss Café is all about good coffee, fresh food and warm hospitality. Whether you're meeting friends or taking a quiet break, we'd love to welcome you.</p>
+          <a class="btn" href="#contact">Visit Our Café →</a>
+          <div class="stats">
+            <div><strong>Fresh</strong><span>Quality Ingredients</span></div>
+            <div><strong>Cozy</strong><span>Friendly Atmosphere</span></div>
+            <div><strong>Made with Care</strong><span>Every Single Day</span></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery">
+      <div class="container">
+        <div class="section-head">
+          <div class="eyebrow">Our Gallery</div>
+          <h2>Moments at Brew Bliss</h2>
+          <p>A glimpse of our cozy space and delicious favorites.</p>
+        </div>
+        <div class="gallery-grid">
+          <img src="https://images.unsplash.com/photo-1495474472287-4d71bcdd2085?auto=format&fit=crop&w=600&q=80" alt="Coffee cup">
+          <img src="https://images.unsplash.com/photo-1550547660-d9450f859349?auto=format&fit=crop&w=600&q=80" alt="Burger">
+          <img src="https://images.unsplash.com/photo-1501339847302-ac426a4a7cbb?auto=format&fit=crop&w=600&q=80" alt="Cafe interior">
+          <img src="https://images.unsplash.com/photo-1578985545062-69928b1d9587?auto=format&fit=crop&w=600&q=80" alt="Cake">
+          <img src="https://images.unsplash.com/photo-1461023058943-07fcbe16d735?auto=format&fit=crop&w=600&q=80" alt="Iced coffee">
+          <img src="https://images.unsplash.com/photo-1445116572660-236099ec97a0?auto=format&fit=crop&w=600&q=80" alt="Coffee bar">
+        </div>
+      </div>
+    </section>
+
+    <section class="contact" id="contact">
+      <div class="container contact-grid">
+        <div>
+          <div class="eyebrow">Contact Us</div>
+          <h2>Let's Have a Coffee</h2>
+          <p>Have a question or want to place an order? Message us and we'll be happy to help.</p>
+          <p>📞 +880 1000-000000</p>
+          <p>✉ hello@brewblisscafe.com</p>
+          <p>📍 Dhaka, Bangladesh</p>
+          <p><small>Demo address and contact details — replace before publishing for a real business.</small></p>
+        </div>
+        <form class="contact-form" id="contactForm">
+          <input id="customerName" type="text" placeholder="Your Name" required>
+          <input id="customerEmail" type="email" placeholder="Your Email (optional)">
+          <textarea id="customerMessage" placeholder="Your Message" required></textarea>
+          <button class="btn" type="submit">Send Message →</button>
+          <small id="formNote" aria-live="polite"></small>
+        </form>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container footer-inner">
+      <a class="logo" href="#home">☕ Brew Bliss<span>CAFÉ</span></a>
+      <div class="footer-links">
+        <a href="#home">Home</a><a href="#menu">Menu</a>
+        <a href="#about">About</a><a href="#gallery">Gallery</a><a href="#contact">Contact</a>
+      </div>
+      <p>© <span id="year"></span> Brew Bliss Café. Demo website for practice.</p>
+    </div>
+  </footer>
+
+  <script>
+    const menuToggle = document.getElementById('menuToggle');
+    const navLinks = document.getElementById('navLinks');
+
+    menuToggle.addEventListener('click', () => {
+      const isOpen = navLinks.classList.toggle('open');
+      menuToggle.setAttribute('aria-expanded', isOpen);
+      menuToggle.textContent = isOpen ? '✕' : '☰';
+    });
+
+    navLinks.querySelectorAll('a').forEach(link => {
+      link.addEventListener('click', () => {
+        navLinks.classList.remove('open');
+        menuToggle.textContent = '☰';
+        menuToggle.setAttribute('aria-expanded', 'false');
+      });
+    });
+
+    document.querySelectorAll('.filter').forEach(button => {
+      button.addEventListener('click', () => {
+        document.querySelectorAll('.filter').forEach(b => b.classList.remove('active'));
+        button.classList.add('active');
+        const category = button.dataset.filter;
+
+        document.querySelectorAll('.food-card').forEach(card => {
+          card.style.display =
+            category === 'all' || card.dataset.category === category ? '' : 'none';
+        });
+      });
+    });
+
+    document.getElementById('contactForm').addEventListener('submit', event => {
+      event.preventDefault();
+      const name = document.getElementById('customerName').value.trim();
+      const email = document.getElementById('customerEmail').value.trim();
+      const message = document.getElementById('customerMessage').value.trim();
+
+      const text = `Hello Brew Bliss Café!\nName: ${name}\nEmail: ${email || 'Not provided'}\nMessage: ${message}`;
+      const whatsappNumber = '8801000000000'; // Replace with the real WhatsApp number
+      document.getElementById('formNote').textContent =
+        'Opening WhatsApp to send your message...';
+      window.open(`https://wa.me/${whatsappNumber}?text=${encodeURIComponent(text)}`, '_blank', 'noopener');
+    });
+
+    document.getElementById('year').textContent = new Date().getFullYear();
+  </script>
+</body>
+  </html>
